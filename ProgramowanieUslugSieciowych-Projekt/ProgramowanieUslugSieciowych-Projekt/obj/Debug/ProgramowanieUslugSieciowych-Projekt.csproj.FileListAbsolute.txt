@@ -1,0 +1,14 @@
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\ProgramowanieUslugSieciowych-Projekt.exe.config
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\ProgramowanieUslugSieciowych-Projekt.exe
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\ProgramowanieUslugSieciowych-Projekt.pdb
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.csprojResolveAssemblyReference.cache
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych_Projekt.Server.resources
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych_Projekt.Properties.Resources.resources
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.csproj.GenerateResource.Cache
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.exe
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.pdb
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\Logger.exe
+E:\.NET workspace\.NET-workspace\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\Logger.pdb
+E:\.NET workspace\Programowanie usług sieciowych\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\bin\Debug\ProgramowanieUslugSieciowych-Projekt.exe.config
+E:\.NET workspace\Programowanie usług sieciowych\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.exe
+E:\.NET workspace\Programowanie usług sieciowych\ProgramowanieUslugSieciowych-Projekt\ProgramowanieUslugSieciowych-Projekt\obj\Debug\ProgramowanieUslugSieciowych-Projekt.pdb
