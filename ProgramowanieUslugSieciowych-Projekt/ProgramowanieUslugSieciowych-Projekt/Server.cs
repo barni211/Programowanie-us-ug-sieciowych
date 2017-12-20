@@ -17,6 +17,7 @@ namespace ProgramowanieUslugSieciowych_Projekt
     public partial class Server : Form
     {
         static int clientCounter = 0;
+        delegate void StringArgReturningVoidDelegate(string text);
         public Server()
         {
             InitializeComponent();
@@ -40,6 +41,22 @@ namespace ProgramowanieUslugSieciowych_Projekt
         public void decrement()
         {
             clientCounter--;
+        }
+
+        public void SetText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the  
+            // calling thread to the thread ID of the creating thread.  
+            // If these threads are different, it returns true.  
+            if (this.richTextBox1.InvokeRequired)
+            {
+                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.richTextBox1.Text += text + "\n";
+            }
         }
     }
 

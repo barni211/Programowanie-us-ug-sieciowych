@@ -1,32 +1,22 @@
-﻿using Logger;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProgramowanieUslugSieciowych_Projekt
+namespace Programowanie_uslug_sieciowych_klient
 {
     static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        /// 
-      
-
+        [STAThread]
         static void Main()
         {
-            
-            Server s = new Server();
-            ServerStarter startServer = new ServerStarter(s);
-            s.ShowDialog();
-
+            Client frmClient = new Client();
+            frmClient.ShowDialog();
         }
-
-  
     }
 }
