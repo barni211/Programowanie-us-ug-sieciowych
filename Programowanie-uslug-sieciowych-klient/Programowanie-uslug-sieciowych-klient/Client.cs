@@ -68,6 +68,14 @@ namespace Programowanie_uslug_sieciowych_klient
             
         }
 
-        
+        private void btnDownloadFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = fileDialog.FileName;
+                client.SendMessage("/download@" + filePath);
+            }
+        }
     } 
 }

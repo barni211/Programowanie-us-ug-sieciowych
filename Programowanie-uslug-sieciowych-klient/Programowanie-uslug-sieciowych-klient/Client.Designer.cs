@@ -30,16 +30,19 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSendFile = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSendMessage = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSendFile = new System.Windows.Forms.Button();
+            this.btnDownloadFile = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,10 +58,10 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.btnSendFile, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -69,16 +72,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(764, 490);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnSendFile
-            // 
-            this.btnSendFile.Location = new System.Drawing.Point(3, 436);
-            this.btnSendFile.Name = "btnSendFile";
-            this.btnSendFile.Size = new System.Drawing.Size(119, 51);
-            this.btnSendFile.TabIndex = 3;
-            this.btnSendFile.Text = "Prześlij plik";
-            this.btnSendFile.UseVisualStyleBackColor = true;
-            this.btnSendFile.Click += new System.EventHandler(this.btnSendFile_Click);
             // 
             // dataGridView1
             // 
@@ -133,6 +126,36 @@
             this.richTextBox2.TabIndex = 2;
             this.richTextBox2.Text = "";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnSendFile);
+            this.flowLayoutPanel1.Controls.Add(this.btnDownloadFile);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 436);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(758, 51);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // btnSendFile
+            // 
+            this.btnSendFile.Location = new System.Drawing.Point(3, 3);
+            this.btnSendFile.Name = "btnSendFile";
+            this.btnSendFile.Size = new System.Drawing.Size(119, 51);
+            this.btnSendFile.TabIndex = 4;
+            this.btnSendFile.Text = "Prześlij plik";
+            this.btnSendFile.UseVisualStyleBackColor = true;
+            this.btnSendFile.Click += new System.EventHandler(this.btnSendFile_Click);
+            // 
+            // btnDownloadFile
+            // 
+            this.btnDownloadFile.Location = new System.Drawing.Point(128, 3);
+            this.btnDownloadFile.Name = "btnDownloadFile";
+            this.btnDownloadFile.Size = new System.Drawing.Size(112, 48);
+            this.btnDownloadFile.TabIndex = 5;
+            this.btnDownloadFile.Text = "Pobierz plik";
+            this.btnDownloadFile.UseVisualStyleBackColor = true;
+            this.btnDownloadFile.Click += new System.EventHandler(this.btnDownloadFile_Click);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +168,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -153,12 +177,14 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnSendFile;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btnSendMessage;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnSendFile;
+        private System.Windows.Forms.Button btnDownloadFile;
     }
 }
 

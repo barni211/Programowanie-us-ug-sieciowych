@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +19,9 @@ namespace Programowanie_uslug_sieciowych_klient
         private StreamReader streamReader;
         private StreamWriter streamWriter;
         private TcpClient socketForServer;
+        private IPAddress[] ipAddress;
+        private Socket clientSock;
+        private IPEndPoint ipEnd;
         private bool connection = false;
         private int port;
 
@@ -25,6 +30,12 @@ namespace Programowanie_uslug_sieciowych_klient
             this.clientForm = textB;
             this.port = port;
             // createLogger();
+
+            ipAddress = Dns.GetHostAddresses("localhost");
+
+            ipEnd = new IPEndPoint(ipAddress[0], port);
+
+            Socket clientSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
         }
 
         public void ConnectWithServer()
@@ -55,37 +66,48 @@ namespace Programowanie_uslug_sieciowych_klient
             clientForm.SetText("*******This is client program who is connected to localhost on port No:10*****");
             try
             {
-                string outputString;
+                string outputString = "";
                 // read the data from the host and display it
                 {
-                    outputString = streamReader.ReadLine();
-                    //Console.WriteLine("Message Recieved by server:" + outputString);
-                    //  AppendConsoleText("Message Recieved by server:" + outputString);
-                    clientForm.SetText("Message Recieved by server:" + outputString);
-                    //Console.WriteLine("Type your message to be recieved by server:");
-                    Console.WriteLine("type:");
-                    string str = Console.ReadLine();
+                  
+
+                  
+
+                    string str = outputString;
                     while (str != "exit")
                     {
-                        streamWriter.WriteLine(str);
-                        streamWriter.Flush();
-                        Console.WriteLine("type:");
-                        str = Console.ReadLine();
+                        outputString = streamReader.ReadLine();
+                        clientForm.SetText("Message Recieved by server:" + outputString);
+                        if (outputString == null)
+                        {
+                            continue;
+                        }
+                        if (outputString.Count() > 8 && outputString.Substring(0, 9) == "/download")
+                        {
+                            string[] tmpStr = outputString.Split(' ');
+                            int allBytesToRead = Int32.Parse(tmpStr[1]);
+                            DownloadFile(allBytesToRead);
+                            outputString = "";
+                            str = "";
+                        }
+                        else
+                        {
+                            streamWriter.WriteLine(str);
+                            streamWriter.Flush();
+                        }
+
                     }
                     if (str == "exit")
                     {
                         streamWriter.WriteLine(str);
                         streamWriter.Flush();
                         connection = false;
-
-                    }
+                    }                
 
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                //log.WriteLog(Level.ERROR, "Exception reading from Server");
-                //AppendConsoleText("Excetion while reading from server");
                 clientForm.SetText("Exception while reading from server");
                 connection = false;
             }
@@ -95,8 +117,41 @@ namespace Programowanie_uslug_sieciowych_klient
             connection = false;
 
             clientForm.SetText("Press any key to exit from client program");
-            //Console.WriteLine("Press any key to exit from client program");
-            //Console.ReadKey();
+        }
+
+        public void DownloadFile(int allBytesToRead)
+        {
+
+
+            while (connection)
+            {
+                bool downloadingFinished = false;
+        
+                    //int allBytesToRead = Int32.Parse(tmpStr[1]);
+                int totalBytesRead = 0;
+                FileStream myDownload = new FileStream(@"C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\ClientLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg", FileMode.Create);
+                byte[] Buffer = new Byte[1024];
+                int bytesRead;
+                while ((bytesRead = socketForServer.Client.Receive(Buffer)) > 0)
+                {
+                    totalBytesRead += bytesRead;
+                    clientForm.SetText("Readed " + totalBytesRead + " bytes.\n");
+                    myDownload.Write(Buffer, 0, bytesRead);
+                    if (totalBytesRead == allBytesToRead)
+                    {
+                        downloadingFinished = true;
+                        break;
+                    }
+                }
+                myDownload.Flush();
+                myDownload.Close();
+                if(downloadingFinished==true)
+                {
+                    break;
+                }
+                            
+            }
+
         }
 
         public void SendMessage(string txt)
@@ -116,11 +171,6 @@ namespace Programowanie_uslug_sieciowych_klient
             socketForServer.Client.SendFile(filePath);
            
         }
-
-        //public string AppendConsoleTextPrivate(string text)
-        //{
-          
-        //}
 
         public ClientConnector ReturnClient()
         {

@@ -1,4 +1,4 @@
-﻿using Logger;
+﻿//using Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,16 +16,16 @@ namespace ProgramowanieUslugSieciowych_Projekt
         private static TcpListener tcpListener = new TcpListener(1800);
         //private //static TcpListener listenerForLogger = new TcpListener(1800);
         private static int clientCounter = 0;
-        private static Logger.Logger log;
+        //private static Logger.Logger log;
         private Server s;
 
         public ServerStarter(Server serv)
         {
             this.s = serv;
-            FileOutputter file = new FileOutputter();
-            log = new Logger.Logger();
-            log.SetLoggerLevel(Level.DEBUG);
-            log.SetLoggerOutput(file);
+            //FileOutputter file = new FileOutputter();
+            //log = new Logger.Logger();
+            //log.SetLoggerLevel(Level.DEBUG);
+            //log.SetLoggerOutput(file);
 
 
             tcpListener.Start();
@@ -55,7 +55,7 @@ namespace ProgramowanieUslugSieciowych_Projekt
             if (socketForClient.Connected)
             {
                 s.increment();
-                log.WriteLog(Level.DEBUG, "Client:" + socketForClient.RemoteEndPoint + " now connected to server.");
+                //log.WriteLog(Level.DEBUG, "Client:" + socketForClient.RemoteEndPoint + " now connected to server.");
                 NetworkStream networkStream = new NetworkStream(socketForClient);
                 System.IO.StreamWriter streamWriter =
                 new System.IO.StreamWriter(networkStream);
@@ -73,6 +73,11 @@ namespace ProgramowanieUslugSieciowych_Projekt
                     {
                         s.SetText("Error while reading file");
                         break;
+                    }
+
+                    if(theString==null)
+                    {
+                        continue;
                     }
                   
                                      
@@ -102,6 +107,16 @@ namespace ProgramowanieUslugSieciowych_Projekt
                         
                         //break;
                     }
+                    else if(theString.Count() > 8 && theString.Substring(0, 9) == "/download")
+                    {
+                        string[] tmpStr = theString.Split('@');
+                        string filePath = tmpStr[1];
+                        byte[] fileData = File.ReadAllBytes(filePath);
+                        streamWriter.WriteLine("/download " + fileData.Count().ToString());
+                        streamWriter.Flush();
+
+                        socketForClient.Send(fileData); //'.SendFile(filePath);
+                    }
                     else
                     {
                         s.SetText("Message recieved by client: " + socketForClient.RemoteEndPoint + ": " + theString);
@@ -114,10 +129,11 @@ namespace ProgramowanieUslugSieciowych_Projekt
                 streamReader.Close();
                 networkStream.Close();
                 streamWriter.Close();
+                socketForClient.Close();
                 s.decrement();
             }
 
-            socketForClient.Close();
+            
 
             //log.WriteLog(Level.INFO, "Press any key to exit from server program");
             //Console.ReadKey();
