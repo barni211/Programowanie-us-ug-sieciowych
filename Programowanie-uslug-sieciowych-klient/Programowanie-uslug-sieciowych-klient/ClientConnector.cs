@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -69,10 +70,7 @@ namespace Programowanie_uslug_sieciowych_klient
                 string outputString = "";
                 // read the data from the host and display it
                 {
-                  
-
-                  
-
+                
                     string str = outputString;
                     while (str != "exit")
                     {
@@ -129,7 +127,8 @@ namespace Programowanie_uslug_sieciowych_klient
         
                     //int allBytesToRead = Int32.Parse(tmpStr[1]);
                 int totalBytesRead = 0;
-                FileStream myDownload = new FileStream(@"C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\ClientLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg", FileMode.Create);
+                string newFilePath = @"C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\ClientLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg";
+                FileStream myDownload = new FileStream(newFilePath, FileMode.Create);
                 byte[] Buffer = new Byte[1024];
                 int bytesRead;
                 while ((bytesRead = socketForServer.Client.Receive(Buffer)) > 0)
@@ -147,6 +146,11 @@ namespace Programowanie_uslug_sieciowych_klient
                 myDownload.Close();
                 if(downloadingFinished==true)
                 {
+                    Bitmap b = new Bitmap(newFilePath);
+                    ShowImage s = new ShowImage(b);
+                    s.Height = b.Height;
+                    s.Width = b.Width;
+                    s.ShowDialog();
                     break;
                 }
                             

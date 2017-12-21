@@ -25,7 +25,7 @@ namespace Programowanie_uslug_sieciowych_klient
 
         private RichTextBox ReturnTextBox()
         {
-            return this.richTextBox1;
+            return this.consoleBox;
         }
 
         private void ConnectWithClient()
@@ -41,20 +41,21 @@ namespace Programowanie_uslug_sieciowych_klient
             // InvokeRequired required compares the thread ID of the  
             // calling thread to the thread ID of the creating thread.  
             // If these threads are different, it returns true.  
-            if (this.richTextBox1.InvokeRequired)
+            if (this.consoleBox.InvokeRequired)
             {
                 StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(SetText);
                 this.Invoke(d, new object[] { text });
             }
             else
             {
-                this.richTextBox1.Text += text;
+                this.consoleBox.Text += text;
             }
         }
 
         private void btnSendMessage_Click(object sender, EventArgs e)
         {
-            client.SendMessage(richTextBox2.Text.ToString());
+            client.SendMessage(msgTextBox.Text.ToString());
+            msgTextBox.Clear();
         }
 
         private void btnSendFile_Click(object sender, EventArgs e)
@@ -75,6 +76,15 @@ namespace Programowanie_uslug_sieciowych_klient
             {
                 string filePath = fileDialog.FileName;
                 client.SendMessage("/download@" + filePath);
+            }
+        }
+
+        private void msgTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                client.SendMessage(msgTextBox.Text.ToString().Replace('\n', ' '));
+                msgTextBox.Clear();
             }
         }
     } 
