@@ -90,13 +90,16 @@ namespace ProgramowanieUslugSieciowych_Projekt
                         {
                             totalBytesRead += bytesRead;
                             s.SetText("Readed " + totalBytesRead + " bytes.\n");
-                            myDownload.WriteAsync(Buffer, 0, bytesRead);
+                            myDownload.Write(Buffer, 0, bytesRead);
                             if(totalBytesRead==allBytesToRead)
                             {
                                 break;
                             }
                         }
+                        myDownload.Flush();
+                        //myDownload.EndWrite();
                         myDownload.Close();
+                        
                         //break;
                     }
                     else
