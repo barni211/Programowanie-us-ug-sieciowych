@@ -38,6 +38,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSendFile = new System.Windows.Forms.Button();
             this.btnDownloadFile = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -131,6 +133,8 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnSendFile);
             this.flowLayoutPanel1.Controls.Add(this.btnDownloadFile);
+            this.flowLayoutPanel1.Controls.Add(this.btnLogin);
+            this.flowLayoutPanel1.Controls.Add(this.btnRegister);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 436);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -156,6 +160,25 @@
             this.btnDownloadFile.Text = "Pobierz plik";
             this.btnDownloadFile.UseVisualStyleBackColor = true;
             this.btnDownloadFile.Click += new System.EventHandler(this.btnDownloadFile_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(246, 3);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(123, 48);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "Logowanie";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(375, 3);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(126, 48);
+            this.btnRegister.TabIndex = 7;
+            this.btnRegister.Text = "Rejestracja";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // Client
             // 
@@ -186,6 +209,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnSendFile;
         private System.Windows.Forms.Button btnDownloadFile;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnRegister;
     }
 }
 

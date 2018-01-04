@@ -87,5 +87,17 @@ namespace Programowanie_uslug_sieciowych_klient
                 msgTextBox.Clear();
             }
         }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            RegisterForm register = new RegisterForm();
+            register.ShowDialog();
+            string registerString = register.ReturnRegisterString();
+            if(registerString!=null)
+            {
+                client.SendMessage("/register #" +  registerString);
+            }
+
+        }
     } 
 }

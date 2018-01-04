@@ -88,6 +88,7 @@ namespace ProgramowanieUslugSieciowych_Projekt
                         string[] tmpStr = theString.Split(' ');
                         int allBytesToRead = Int32.Parse(tmpStr[1]);
                         int totalBytesRead = 0;
+                        //FileStream myDownload = new FileStream(@"E:\.NET workspace\Programowanie usług sieciowych\FileLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg", FileMode.Create);
                         FileStream myDownload = new FileStream(@"E:\.NET workspace\Programowanie usług sieciowych\FileLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg", FileMode.Create);
                         byte[] Buffer = new Byte[1024];
                         int bytesRead;
@@ -116,6 +117,13 @@ namespace ProgramowanieUslugSieciowych_Projekt
                         streamWriter.Flush();
 
                         socketForClient.Send(fileData); //'.SendFile(filePath);
+                    }
+                    else if(theString.Count() > 10 && theString.Substring(0,10)== "/register ")
+                    {
+
+
+                      //  socketForClient.s
+                      // Wysyłanie wiadomości do bazy danych z danymi przesłanymi przez klienta do zarejestrowania.
                     }
                     else
                     {

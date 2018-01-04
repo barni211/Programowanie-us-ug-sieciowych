@@ -127,7 +127,8 @@ namespace Programowanie_uslug_sieciowych_klient
         
                     //int allBytesToRead = Int32.Parse(tmpStr[1]);
                 int totalBytesRead = 0;
-                string newFilePath = @"C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\ClientLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg";
+                //string newFilePath = @"C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\ClientLocation\" + "DownloadedFile" + Guid.NewGuid() + ".jpg";
+                string newFilePath = @"E:\.NET workspace\Programowanie usług sieciowych\ClientLocation" + "DownloadedFile" + Guid.NewGuid() + ".jpg";
                 FileStream myDownload = new FileStream(newFilePath, FileMode.Create);
                 byte[] Buffer = new Byte[1024];
                 int bytesRead;
