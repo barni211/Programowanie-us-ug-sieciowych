@@ -75,7 +75,7 @@ namespace Programowanie_uslug_sieciowych_klient
                     while (str != "exit")
                     {
                         outputString = streamReader.ReadLine();
-                        clientForm.SetText("Message Recieved by server:" + outputString);
+                        //clientForm.SetText("Message Recieved by server:" + outputString);
                         if (outputString == null)
                         {
                             continue;
@@ -85,6 +85,20 @@ namespace Programowanie_uslug_sieciowych_klient
                             string[] tmpStr = outputString.Split(' ');
                             int allBytesToRead = Int32.Parse(tmpStr[1]);
                             DownloadFile(allBytesToRead);
+                            outputString = "";
+                            str = "";
+                        }
+                        else if(outputString.Count() > 8 && outputString.Substring(0, 13) == "/loginSuccess")
+                        {
+                            string[] tmpStr = outputString.Split(' ');
+                           // clientForm.SetText("Hello " + tmpStr[1] + ", have a nice day!");
+                            outputString = "";
+                            str = "";
+                            clientForm.ActiveForm("Hello " + tmpStr[1] + ", have a nice day!");
+                        }
+                        else if(outputString.Count() > 8 && outputString.Substring(0, 12) == "/loginFailed")
+                        {
+                            clientForm.SetText("Login failed. There is no user with gived params");
                             outputString = "";
                             str = "";
                         }

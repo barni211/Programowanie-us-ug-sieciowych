@@ -37,6 +37,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -98,6 +99,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(215, 20);
             this.textBox2.TabIndex = 6;
+            this.textBox2.UseSystemPasswordChar = true;
             // 
             // textBox3
             // 
@@ -105,6 +107,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(175, 20);
             this.textBox3.TabIndex = 7;
+            this.textBox3.UseSystemPasswordChar = true;
             // 
             // textBox4
             // 
@@ -113,11 +116,22 @@
             this.textBox4.Size = new System.Drawing.Size(216, 20);
             this.textBox4.TabIndex = 8;
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(145, 112);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(122, 28);
+            this.btnClose.TabIndex = 9;
+            this.btnClose.Text = "Wyjdź";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 152);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -145,5 +159,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button btnClose;
     }
 }

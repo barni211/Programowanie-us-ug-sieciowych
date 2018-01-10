@@ -21,6 +21,9 @@ namespace Programowanie_uslug_sieciowych_klient
             Thread clientConnectionThread;
             clientConnectionThread = new Thread(ConnectWithClient);
             clientConnectionThread.Start();
+            btnDownloadFile.Enabled = false;
+            btnSendFile.Enabled = false;
+            btnSendMessage.Enabled = false;
         }
 
         private RichTextBox ReturnTextBox()
@@ -49,6 +52,20 @@ namespace Programowanie_uslug_sieciowych_klient
             else
             {
                 this.consoleBox.Text += text;
+            }
+        }
+
+        public void ActiveForm(string text)
+        {
+            if (this.consoleBox.InvokeRequired)
+            {
+                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(ActiveForm);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.consoleBox.Text += text;
+                EnableButtons();
             }
         }
 
@@ -98,6 +115,24 @@ namespace Programowanie_uslug_sieciowych_klient
                 client.SendMessage("/register #" +  registerString);
             }
 
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            LoginForm register = new LoginForm();
+            register.ShowDialog();
+            string registerString = register.ReturnLoginString();
+            if (registerString != null)
+            {
+                client.SendMessage("/login #" + registerString);
+            }
+        }
+
+        private void EnableButtons()
+        {
+            btnDownloadFile.Enabled = true;
+            btnSendFile.Enabled = true;
+            btnSendMessage.Enabled = true;
         }
     } 
 }

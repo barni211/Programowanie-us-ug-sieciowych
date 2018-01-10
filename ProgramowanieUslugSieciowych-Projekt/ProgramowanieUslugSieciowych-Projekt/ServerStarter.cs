@@ -19,8 +19,12 @@ namespace ProgramowanieUslugSieciowych_Projekt
         //private static Logger.Logger log;
         private Server s;
 
+        private DataBase dbConnection;
+        private Dictionary<User, Socket> loggedUsers = new Dictionary<User, Socket>();
+
         public ServerStarter(Server serv)
         {
+            dbConnection = new DataBase();
             this.s = serv;
             //FileOutputter file = new FileOutputter();
             //log = new Logger.Logger();
@@ -121,9 +125,29 @@ namespace ProgramowanieUslugSieciowych_Projekt
                     else if(theString.Count() > 10 && theString.Substring(0,10)== "/register ")
                     {
 
-
-                      //  socketForClient.s
-                      // Wysyłanie wiadomości do bazy danych z danymi przesłanymi przez klienta do zarejestrowania.
+                        string[] userData = theString.Split('#');
+                        dbConnection.RegisterNewUserInDb(userData[1], userData[2], userData[4]);
+                        streamWriter.WriteLine("New user succesfully registered! You're welcome, " + userData[1] + ".");
+                        streamWriter.Flush();
+                    }
+                    else if(theString.Count() > 10 && theString.Substring(0,6)=="/login")
+                    {
+                        string[] userData = theString.Split('#');
+                        string IdAndUsername = dbConnection.LoginIntoApplication(userData[1], userData[2]);
+                        if(IdAndUsername!=null)
+                        {
+                            //string[] tmpUserString = IdAndUsername.Split('@');
+                            User tmpUser = new User(IdAndUsername, userData[2]);
+                            loggedUsers.Add(tmpUser, socketForClient);
+                            streamWriter.WriteLine("/loginSuccess " + IdAndUsername);
+                            streamWriter.Flush();
+                        }
+                        else
+                        {
+                            streamWriter.WriteLine("/loginFailed");
+                            streamWriter.Flush();
+                        }
+                        
                     }
                     else
                     {

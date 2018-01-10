@@ -27,3 +27,5 @@ C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\Prog
 C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\Programowanie-uslug-sieciowych-klient\Programowanie-uslug-sieciowych-klient\obj\Debug\Programowanie-uslug-sieciowych-klient.csproj.GenerateResource.Cache
 C:\Users\bartosz.fijalkowski\Desktop\Jarocki\Programowanie-us-ug-sieciowych\Programowanie-uslug-sieciowych-klient\Programowanie-uslug-sieciowych-klient\obj\Debug\Programowanie_uslug_sieciowych_klient.ShowImage.resources
 E:\.NET workspace\Programowanie usług sieciowych\Programowanie-uslug-sieciowych-klient\Programowanie-uslug-sieciowych-klient\obj\Debug\Programowanie_uslug_sieciowych_klient.ShowImage.resources
+E:\.NET workspace\Programowanie usług sieciowych\Programowanie-uslug-sieciowych-klient\Programowanie-uslug-sieciowych-klient\obj\Debug\Programowanie_uslug_sieciowych_klient.RegisterForm.resources
+E:\.NET workspace\Programowanie usług sieciowych\Programowanie-uslug-sieciowych-klient\Programowanie-uslug-sieciowych-klient\obj\Debug\Programowanie_uslug_sieciowych_klient.LoginForm.resources

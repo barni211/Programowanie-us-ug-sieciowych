@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProgramowanieUslugSieciowych_Projekt
 {
@@ -60,7 +61,6 @@ namespace ProgramowanieUslugSieciowych_Projekt
         }
 
         public DataTable CheckLogin(String login, String haslo)
-
         {
 
             DataTable result = new DataTable();
@@ -87,6 +87,66 @@ namespace ProgramowanieUslugSieciowych_Projekt
                 //MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
                 return null;
             }
+        }
+
+        public void RegisterNewUserInDb(String login, String haslo, string email)
+        {
+
+            DataTable result = new DataTable();
+            //  result.Columns.Add(new DataColumn("wynik"));
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "PUS.RegisterNewUser";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.Parameters.AddWithValue("@Password", haslo);
+                cmd.Parameters.AddWithValue("@Email", email);
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
+               // return null;
+            }
+        }
+
+        public string LoginIntoApplication(string login, string haslo)
+        {
+            DataTable result = new DataTable();
+            string username = null;
+            //  result.Columns.Add(new DataColumn("wynik"));
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "PUS.CheckThatUserExists";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.Parameters.AddWithValue("@Password", haslo);
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+
+                if(result.Rows.Count > 0)
+                {
+                    username = result.Rows[0]["ID"].ToString() + "@" + result.Rows[0]["LOGIN"].ToString();
+                }
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
+                // return null;
+            }
+
+            return username;
         }
     }
 }

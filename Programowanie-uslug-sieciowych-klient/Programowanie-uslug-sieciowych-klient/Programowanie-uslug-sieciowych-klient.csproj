@@ -46,29 +46,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs">
+    <Compile Include="Forms\Client.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Client.Designer.cs">
+    <Compile Include="Forms\Client.Designer.cs">
       <DependentUpon>Client.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientConnector.cs" />
+    <Compile Include="Model\ClientConnector.cs" />
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterForm.cs">
+    <Compile Include="Forms\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterForm.Designer.cs">
+    <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowImage.cs">
+    <Compile Include="Forms\ShowImage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowImage.Designer.cs">
+    <Compile Include="Forms\ShowImage.Designer.cs">
       <DependentUpon>ShowImage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Client.resx">
+    <EmbeddedResource Include="Forms\Client.resx">
       <DependentUpon>Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,10 +89,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RegisterForm.resx">
+    <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowImage.resx">
+    <EmbeddedResource Include="Forms\ShowImage.resx">
       <DependentUpon>ShowImage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
