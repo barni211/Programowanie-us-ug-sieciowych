@@ -40,6 +40,9 @@
             this.btnDownloadFile = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnFriends = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -68,8 +71,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.4898F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.83673F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(764, 490);
@@ -79,9 +82,9 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 220);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 221);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(758, 102);
+            this.dataGridView1.Size = new System.Drawing.Size(758, 101);
             this.dataGridView1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -96,7 +99,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(758, 102);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(758, 103);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btnSendMessage
@@ -104,7 +107,7 @@
             this.btnSendMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSendMessage.Location = new System.Drawing.Point(3, 3);
             this.btnSendMessage.Name = "btnSendMessage";
-            this.btnSendMessage.Size = new System.Drawing.Size(366, 96);
+            this.btnSendMessage.Size = new System.Drawing.Size(366, 97);
             this.btnSendMessage.TabIndex = 0;
             this.btnSendMessage.Text = "Wyślij wiadomość";
             this.btnSendMessage.UseVisualStyleBackColor = true;
@@ -115,7 +118,7 @@
             this.consoleBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consoleBox.Location = new System.Drawing.Point(375, 3);
             this.consoleBox.Name = "consoleBox";
-            this.consoleBox.Size = new System.Drawing.Size(380, 96);
+            this.consoleBox.Size = new System.Drawing.Size(380, 97);
             this.consoleBox.TabIndex = 1;
             this.consoleBox.Text = "";
             // 
@@ -124,7 +127,7 @@
             this.msgTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.msgTextBox.Location = new System.Drawing.Point(3, 3);
             this.msgTextBox.Name = "msgTextBox";
-            this.msgTextBox.Size = new System.Drawing.Size(758, 211);
+            this.msgTextBox.Size = new System.Drawing.Size(758, 212);
             this.msgTextBox.TabIndex = 2;
             this.msgTextBox.Text = "";
             this.msgTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.msgTextBox_KeyPress);
@@ -135,10 +138,13 @@
             this.flowLayoutPanel1.Controls.Add(this.btnDownloadFile);
             this.flowLayoutPanel1.Controls.Add(this.btnLogin);
             this.flowLayoutPanel1.Controls.Add(this.btnRegister);
+            this.flowLayoutPanel1.Controls.Add(this.btnLogout);
+            this.flowLayoutPanel1.Controls.Add(this.btnFriends);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 436);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 437);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(758, 51);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(758, 50);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnSendFile
@@ -181,6 +187,36 @@
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(507, 3);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(98, 48);
+            this.btnLogout.TabIndex = 8;
+            this.btnLogout.Text = "Wyloguj";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnFriends
+            // 
+            this.btnFriends.Location = new System.Drawing.Point(611, 3);
+            this.btnFriends.Name = "btnFriends";
+            this.btnFriends.Size = new System.Drawing.Size(91, 48);
+            this.btnFriends.TabIndex = 9;
+            this.btnFriends.Text = "Znajomi";
+            this.btnFriends.UseVisualStyleBackColor = true;
+            this.btnFriends.Click += new System.EventHandler(this.btnFriends_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 60);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,6 +248,9 @@
         private System.Windows.Forms.Button btnDownloadFile;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnFriends;
+        private System.Windows.Forms.Button button1;
     }
 }
 

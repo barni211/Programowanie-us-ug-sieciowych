@@ -1,6 +1,7 @@
 ﻿//using Logger;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -58,6 +59,7 @@ namespace ProgramowanieUslugSieciowych_Projekt
             // Debug.Print("Client is connected, hello");
             if (socketForClient.Connected)
             {
+                int flag = 0;
                 s.increment();
                 //log.WriteLog(Level.DEBUG, "Client:" + socketForClient.RemoteEndPoint + " now connected to server.");
                 NetworkStream networkStream = new NetworkStream(socketForClient);
@@ -67,7 +69,7 @@ namespace ProgramowanieUslugSieciowych_Projekt
                 new System.IO.StreamReader(networkStream);
 
                 //here we recieve client's text if any.
-                while (true)
+                while (flag == 0)
                 {
                     string theString = "";
                     try {
@@ -86,7 +88,24 @@ namespace ProgramowanieUslugSieciowych_Projekt
                   
                                      
                     if (theString == "exit")
+                    {
+                        //loggedUsers
+                        //foreach(Socket sock in loggedUsers.Values)
+                        //{
+                        //    if(socketForClient.Equals(sock))
+                        //    {
+
+                        //        loggedUsers.Remove(sock);
+                        //    }
+                        //}
+                        streamWriter.WriteLine("exit");
+                        streamWriter.Flush();
+                        var item = loggedUsers.First(kvp => kvp.Value == socketForClient);
+                        loggedUsers.Remove(item.Key);
+                        flag = 1;
+
                         break;
+                    } 
                     else if(theString.Count() > 8 && theString.Substring(0,7) == "/binary")
                     {
                         string[] tmpStr = theString.Split(' ');
@@ -149,6 +168,66 @@ namespace ProgramowanieUslugSieciowych_Projekt
                         }
                         
                     }
+                    else if (theString.Count() > 7 && theString.Substring(0, 6) == "/sendTo")
+                    {
+                        //string format is look like this: /sendTo@sender@receiver@message
+                        string[] tmpStr = theString.Split('@');
+                        User tmpSender = FindUserByKey(tmpStr[1]);
+                        User tmpReceiver = FindUserByKey(tmpStr[2]);
+                        dbConnection.SendMessageToUser(tmpStr[3], tmpSender.GetUserLogin(), tmpStr[2]);
+                        if(tmpReceiver!=null)
+                        {
+                            SendMessageFromClientToClient(tmpSender, tmpReceiver, "/refreshConversation");
+                        }
+
+                    }
+                    else if(theString.Count() > 7 && theString.Substring(0, 10) == "/addFriend")
+                    {
+                        //string format is look like this: /addFriend@friend
+                        string[] tmpStr = theString.Split('@');
+                        var item = loggedUsers.First(kvp => kvp.Value == socketForClient);
+                        User tmpSender = item.Key;
+                        //User tmpSender = FindUserByKey(tmpStr[1]);
+                        User tmpReceiver = FindUserByKey(tmpStr[1]);
+                        dbConnection.AddNewFriend(tmpSender.GetUserLogin(), tmpStr[1]);
+                        if (tmpReceiver != null)
+                        {
+                            string msgToReceiver = "/newFriend @" + tmpSender.GetUserLogin();
+                            SendMessageFromClientToClient(tmpSender, tmpReceiver, msgToReceiver);
+                        }
+                    }
+                    else if (theString.Count() > 7 && theString.Substring(0, 11) == "/showFriend")
+                    {
+                        //string format is look like this: /showFriend@owner
+                        var item = loggedUsers.First(kvp => kvp.Value == socketForClient);
+                        User tmpSender = item.Key;
+
+                       // string[] tmpStr = theString.Split('@');
+                       // User tmpSender = FindUserByKey(tmpStr[1]);
+                        //User tmpReceiver = FindUserByKey(tmpStr[2]);
+                        System.Data.DataTable friends = dbConnection.ShowFriendList(tmpSender.GetUserLogin());
+                        StringBuilder stringFriendsList = new StringBuilder();
+                        stringFriendsList.Append("/showFriends#");
+                        foreach(DataRow row in friends.Rows)
+                        {
+                            int friendId = Int16.Parse(row[0].ToString());
+                            string friendLogin = row[1].ToString();
+                            string active = "inactive";
+                            foreach(User user in loggedUsers.Keys)
+                            {
+                                if(user.GetUserLogin().Equals(friendLogin))
+                                {
+                                    active = "active";
+                                }
+                            }
+                            stringFriendsList.Append(friendId + "@" + friendLogin + "@" + active + "#");
+                        }
+
+                        string stringToSend = stringFriendsList.ToString();
+                        streamWriter.WriteLine(stringToSend);
+                        streamWriter.Flush();
+
+                    }
                     else
                     {
                         s.SetText("Message recieved by client: " + socketForClient.RemoteEndPoint + ": " + theString);
@@ -158,10 +237,10 @@ namespace ProgramowanieUslugSieciowych_Projekt
                      
                     
                 }
-                streamReader.Close();
-                networkStream.Close();
-                streamWriter.Close();
-                socketForClient.Close();
+                //streamReader.Close();
+                //networkStream.Close();
+                //streamWriter.Close();
+                //socketForClient.Close();
                 s.decrement();
             }
 
@@ -170,5 +249,38 @@ namespace ProgramowanieUslugSieciowych_Projekt
             //log.WriteLog(Level.INFO, "Press any key to exit from server program");
             //Console.ReadKey();
         }
-    }
+
+        private User FindUserByKey(string username)
+        {
+            foreach(User tmpVal in loggedUsers.Keys)
+            {
+                if(tmpVal.GetUserLogin().Equals(username))
+                {
+                    return tmpVal;
+                }
+            }
+            return null;
+        }
+
+        private void SendMessageFromClientToClient(User sender, User receiver, string message)
+        {
+            Socket socketForClient = loggedUsers[receiver];
+
+            NetworkStream networkStream = new NetworkStream(socketForClient);
+            System.IO.StreamWriter streamWriter =
+            new System.IO.StreamWriter(networkStream);
+            System.IO.StreamReader streamReader =
+            new System.IO.StreamReader(networkStream);
+
+            streamWriter.WriteLine(message + sender.GetUserLogin());
+        }
+
+
+
+    //private Socket FindUserSocket(User user)
+    //{
+
+    //    return null;
+    //}
+}
 }

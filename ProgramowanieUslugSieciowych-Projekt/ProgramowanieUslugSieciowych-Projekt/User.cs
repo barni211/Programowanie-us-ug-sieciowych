@@ -22,6 +22,16 @@ namespace ProgramowanieUslugSieciowych_Projekt
             friends = new List<User>();
         }
 
+        public int GetUserIdByLogin(string login)
+        {
+            return userId;
+        }
+
+        public string GetUserLogin()
+        {
+            return login;
+        }
+
 
     }
 }

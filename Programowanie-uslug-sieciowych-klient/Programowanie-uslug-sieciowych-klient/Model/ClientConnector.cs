@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programowanie_uslug_sieciowych_klient.Forms;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -25,7 +26,8 @@ namespace Programowanie_uslug_sieciowych_klient
         private IPEndPoint ipEnd;
         private bool connection = false;
         private int port;
-
+        private FriendsForm friendsGrid;
+        private bool friendsListOpened = false;
         public ClientConnector(int port, Client textB)
         {
             this.clientForm = textB;
@@ -37,6 +39,8 @@ namespace Programowanie_uslug_sieciowych_klient
             ipEnd = new IPEndPoint(ipAddress[0], port);
 
             Socket clientSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+
+            friendsGrid = new FriendsForm();
         }
 
         public void ConnectWithServer()
@@ -72,13 +76,17 @@ namespace Programowanie_uslug_sieciowych_klient
                 {
                 
                     string str = outputString;
-                    while (str != "exit")
+                    while (str != "exit" && connection == true)
                     {
                         outputString = streamReader.ReadLine();
                         //clientForm.SetText("Message Recieved by server:" + outputString);
                         if (outputString == null)
                         {
                             continue;
+                        }
+                        if(outputString=="exit")
+                        {
+                            break;
                         }
                         if (outputString.Count() > 8 && outputString.Substring(0, 9) == "/download")
                         {
@@ -99,6 +107,23 @@ namespace Programowanie_uslug_sieciowych_klient
                         else if(outputString.Count() > 8 && outputString.Substring(0, 12) == "/loginFailed")
                         {
                             clientForm.SetText("Login failed. There is no user with gived params");
+                            outputString = "";
+                            str = "";
+                        }
+                        else if (outputString.Count() > 8 && outputString.Substring(0, 12) == "/showFriends")
+                        {
+                            //clientForm.SetText("Login failed. There is no user with gived params");
+                            if (friendsListOpened == false)
+                            {
+                                friendsGrid.FillGridWithFriends(outputString);
+                                friendsGrid.SetClientConnector(this);
+                                friendsListOpened = true;
+                                friendsGrid.ShowDialog();
+                            }
+                            else
+                            {
+                                friendsGrid.FillGridWithFriends(outputString);
+                            }
                             outputString = "";
                             str = "";
                         }
@@ -128,7 +153,7 @@ namespace Programowanie_uslug_sieciowych_klient
             networkStream.Close();
             connection = false;
 
-            clientForm.SetText("Press any key to exit from client program");
+            //clientForm.SetText("Press any key to exit from client program");
         }
 
         public void DownloadFile(int allBytesToRead)
@@ -196,7 +221,11 @@ namespace Programowanie_uslug_sieciowych_klient
             return this;
         }
 
-
+        public void CloseConnection()
+        {
+            connection = false;
+            socketForServer.Close();
+        }
 
     }
 }

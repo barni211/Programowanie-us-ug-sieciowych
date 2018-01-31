@@ -14,6 +14,7 @@ namespace Programowanie_uslug_sieciowych_klient
     public partial class Client : Form
     {
         private ClientConnector client;
+        private bool connected = false;
         delegate void StringArgReturningVoidDelegate(string text);
         public Client()
         {
@@ -21,9 +22,7 @@ namespace Programowanie_uslug_sieciowych_klient
             Thread clientConnectionThread;
             clientConnectionThread = new Thread(ConnectWithClient);
             clientConnectionThread.Start();
-            btnDownloadFile.Enabled = false;
-            btnSendFile.Enabled = false;
-            btnSendMessage.Enabled = false;
+            DisableButtons();
         }
 
         private RichTextBox ReturnTextBox()
@@ -33,8 +32,11 @@ namespace Programowanie_uslug_sieciowych_klient
 
         private void ConnectWithClient()
         {
-            client = new ClientConnector(1800, this).ReturnClient();//ReturnTextBox());
-            client.ConnectWithServer();
+            if (connected == false)
+            {
+                client = new ClientConnector(1800, this).ReturnClient();//ReturnTextBox());
+                client.ConnectWithServer();
+            }
         }
 
       
@@ -133,6 +135,39 @@ namespace Programowanie_uslug_sieciowych_klient
             btnDownloadFile.Enabled = true;
             btnSendFile.Enabled = true;
             btnSendMessage.Enabled = true;
+            btnLogout.Enabled = true;
+            btnLogin.Enabled = false;
+            btnRegister.Enabled = false;
+            btnFriends.Enabled = true;
+        }
+
+        private void DisableButtons()
+        {
+            btnDownloadFile.Enabled = false;
+            btnSendFile.Enabled = false;
+            btnSendMessage.Enabled = false;
+            btnLogout.Enabled = false;
+            btnLogin.Enabled = true;
+            btnRegister.Enabled = true;
+            btnFriends.Enabled = false;
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            client.SendMessage("exit");
+            DisableButtons();
+            client.CloseConnection();
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFriends_Click(object sender, EventArgs e)
+        {
+            client.SendMessage("/showFriend");
         }
     } 
 }

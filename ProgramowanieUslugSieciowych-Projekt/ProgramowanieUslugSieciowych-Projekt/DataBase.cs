@@ -148,5 +148,86 @@ namespace ProgramowanieUslugSieciowych_Projekt
 
             return username;
         }
+
+        public void SendMessageToUser(String message, String sender, String receiver)
+        {
+
+            DataTable result = new DataTable();
+            //  result.Columns.Add(new DataColumn("wynik"));
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "PUS.SendMessageToUser";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@MESSAGE", message);
+                cmd.Parameters.AddWithValue("@SENDER", sender);
+                cmd.Parameters.AddWithValue("@RECEIVER", receiver);
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
+                // return null;
+            }
+        }
+
+        public DataTable ShowFriendList(String user)
+        {
+            DataTable result = new DataTable();
+            //  result.Columns.Add(new DataColumn("wynik"));
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "PUS.ShowFriendsList";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@USER", user);
+            
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
+                 return null;
+            }
+
+        }
+
+        public void AddNewFriend(String user, String friend)
+        {
+            DataTable result = new DataTable();
+            //  result.Columns.Add(new DataColumn("wynik"));
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "PUS.AddNewFriend";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@OWNER", user);
+                cmd.Parameters.AddWithValue("@FRIEND", friend);
+
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się przeprowadzić operacji na bazie. " + ex.ToString());
+                //return null;
+            }
+        }
+
+
     }
 }
